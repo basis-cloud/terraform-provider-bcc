@@ -94,6 +94,9 @@ func (args *Arguments) injectContextVdcById() {
 			Required:    true,
 			ForceNew:    true,
 			Description: "id of the VDC",
+			ValidateDiagFunc: validation.ToDiagFunc(
+				validation.StringIsNotEmpty,
+			),
 		},
 	})
 }
