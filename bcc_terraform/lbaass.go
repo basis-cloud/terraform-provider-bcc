@@ -25,9 +25,12 @@ func (args *Arguments) injectContextGetLbaas() {
 func (args *Arguments) injectContextLbaasByID() {
 	args.merge(Arguments{
 		"lbaas_id": {
-			Type:        schema.TypeString,
-			Required:    true,
-			ForceNew:    true,
+			Type:     schema.TypeString,
+			Required: true,
+			ForceNew: true,
+			ValidateDiagFunc: validation.ToDiagFunc(
+				validation.StringIsNotEmpty,
+			),
 			Description: "id of the Lbaas",
 		},
 	})
@@ -36,9 +39,12 @@ func (args *Arguments) injectContextLbaasByID() {
 func (args *Arguments) injectLbaasPort() {
 	args.merge(Arguments{
 		"network_id": {
-			Type:        schema.TypeString,
-			ForceNew:    true,
-			Required:    true,
+			Type:     schema.TypeString,
+			ForceNew: true,
+			Required: true,
+			ValidateDiagFunc: validation.ToDiagFunc(
+				validation.StringIsNotEmpty,
+			),
 			Description: "id of the Network",
 		},
 		"ip_address": {

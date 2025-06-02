@@ -23,6 +23,7 @@ func (args *Arguments) injectContextGetNetwork() {
 }
 
 func (args *Arguments) injectCreateNetwork() {
+
 	args.merge(Arguments{
 		"name": {
 			Type:     schema.TypeString,
@@ -88,9 +89,17 @@ func (args *Arguments) injectCreateNetwork() {
 						Description: "enable dhcp service of the Subnet",
 					},
 					"dns": {
-						Type:        schema.TypeList,
-						Required:    true,
-						Elem:        &schema.Schema{Type: schema.TypeString},
+						Type:     schema.TypeList,
+						Required: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString,
+							ValidateDiagFunc: validation.ToDiagFunc(
+								validation.All(
+									validation.StringIsNotEmpty,
+									validation.StringLenBetween(1, 100),
+								),
+							),
+						},
 						Description: "dns servers list",
 					},
 				},
