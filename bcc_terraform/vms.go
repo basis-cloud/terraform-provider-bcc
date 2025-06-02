@@ -25,8 +25,11 @@ func (args *Arguments) injectContextGetVm() {
 func (args *Arguments) injectContextVmById() {
 	args.merge(Arguments{
 		"vm_id": {
-			Type:        schema.TypeString,
-			Required:    true,
+			Type:     schema.TypeString,
+			Required: true,
+			ValidateDiagFunc: validation.ToDiagFunc(
+				validation.StringIsNotEmpty,
+			),
 			Description: "id of the Vm",
 		},
 	})
