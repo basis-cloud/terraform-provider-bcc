@@ -14,7 +14,7 @@ import (
 
 func resourcePort() *schema.Resource {
 	args := Defaults()
-	args.injectContextVdcById()
+	args.injectContextOptionalVdcById()
 	args.injectCreatePort()
 
 	return &schema.Resource{
