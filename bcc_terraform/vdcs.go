@@ -101,6 +101,20 @@ func (args *Arguments) injectContextVdcById() {
 	})
 }
 
+func (args *Arguments) injectContextOptionalVdcById() {
+	args.merge(Arguments{
+		"vdc_id": {
+			Type:     schema.TypeString,
+			Optional: true,
+			ForceNew: true,
+			ValidateDiagFunc: validation.ToDiagFunc(
+				validation.StringIsNotEmpty,
+			),
+			Description: "id of the VDC",
+		},
+	})
+}
+
 func (args *Arguments) injectContextVdcByIdForData() {
 	args.merge(Arguments{
 		"vdc_id": {
