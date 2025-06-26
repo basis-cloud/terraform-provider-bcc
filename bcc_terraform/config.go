@@ -11,6 +11,7 @@ import (
 
 type Config struct {
 	Token            string
+	CertPath         string
 	APIEndpoint      string
 	TerraformVersion string
 	ClientID         string
@@ -26,7 +27,7 @@ func (c *Config) Client() (*CombinedConfig, diag.Diagnostics) {
 	logger := logrus.New()
 	logger.SetLevel(logrus.DebugLevel)
 
-	manager := bcc.NewManager(c.Token)
+	manager := bcc.NewManager(c.Token, c.CertPath)
 	manager.Logger = logger
 	manager.BaseURL = strings.TrimSuffix(c.APIEndpoint, "/")
 	manager.ClientID = c.ClientID
