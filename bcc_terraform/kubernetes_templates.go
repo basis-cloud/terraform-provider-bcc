@@ -8,6 +8,7 @@ func (args *Arguments) injectContextKubernetesTemplateById() {
 			Type:        schema.TypeString,
 			ForceNew:    true,
 			Required:    true,
+			ForceNew:    true,
 			Description: "id of the Kubernetes Template",
 		},
 	})
