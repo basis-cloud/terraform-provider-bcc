@@ -2,6 +2,7 @@ package bcc_terraform
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -10,6 +11,15 @@ import (
 func Provider() *schema.Provider {
 	p := &schema.Provider{
 		Schema: map[string]*schema.Schema{
+			"cert_path": {
+				Type:     schema.TypeString,
+				Optional: true,
+				ValidateDiagFunc: validation.ToDiagFunc(
+					validation.StringIsNotEmpty,
+				),
+				DefaultFunc: schema.EnvDefaultFunc("BASIS_API_CERT", ""),
+				Description: "The path to the certificate for basis api.",
+			},
 			"token": {
 				Type:        schema.TypeString,
 				Optional:    true,
@@ -108,6 +118,7 @@ func Provider() *schema.Provider {
 func providerConfigure(d *schema.ResourceData, terraformVersion string) (interface{}, diag.Diagnostics) {
 	config := Config{
 		Token:            d.Get("token").(string),
+		CertPath:         d.Get("cert_path").(string),
 		APIEndpoint:      d.Get("api_endpoint").(string),
 		ClientID:         d.Get("client_id").(string),
 		TerraformVersion: terraformVersion,
