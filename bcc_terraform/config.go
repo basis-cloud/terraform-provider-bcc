@@ -27,7 +27,10 @@ func (c *Config) Client() (*CombinedConfig, diag.Diagnostics) {
 	logger := logrus.New()
 	logger.SetLevel(logrus.DebugLevel)
 
-	manager := bcc.NewManager(c.Token, c.CertPath)
+	manager, err := bcc.NewManager(c.Token, c.CertPath)
+	if err != nil {
+		return nil, diag.Errorf("Error in create Manager: %s", err)
+	}
 	manager.Logger = logger
 	manager.BaseURL = strings.TrimSuffix(c.APIEndpoint, "/")
 	manager.ClientID = c.ClientID
