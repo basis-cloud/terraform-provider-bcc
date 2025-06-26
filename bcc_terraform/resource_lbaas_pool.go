@@ -110,9 +110,11 @@ func resourceLbaasPoolRead(ctx context.Context, d *schema.ResourceData, meta int
 			"id":     member.ID,
 			"port":   member.Port,
 			"weight": member.Weight,
-			"vm":     member.Vm.ID,
+			"vm_id":  member.Vm.ID,
 		}
 	}
+
+	d.Set("member", flattenedPools)
 
 	return
 }
