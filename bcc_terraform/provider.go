@@ -2,8 +2,6 @@ package bcc_terraform
 
 import (
 	"context"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
-
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
@@ -11,14 +9,29 @@ import (
 func Provider() *schema.Provider {
 	p := &schema.Provider{
 		Schema: map[string]*schema.Schema{
-			"cert_path": {
-				Type:     schema.TypeString,
-				Optional: true,
-				ValidateDiagFunc: validation.ToDiagFunc(
-					validation.StringIsNotEmpty,
-				),
-				DefaultFunc: schema.EnvDefaultFunc("BASIS_API_CERT", ""),
-				Description: "The path to the certificate for basis api.",
+			"ca_cert": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				DefaultFunc: schema.EnvDefaultFunc("BASIS_ROOT_CERT", ""),
+				Description: "BASIS Root CA certificate",
+			},
+			"cert": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				DefaultFunc: schema.EnvDefaultFunc("SERVER_API_CERT", ""),
+				Description: "Server certificate, cannot be used without CA_cert",
+			},
+			"cert_key": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				DefaultFunc: schema.EnvDefaultFunc("SERVER_CERT_KEY", ""),
+				Description: "RSA key for server certificate",
+			},
+			"insecure": {
+				Type:        schema.TypeBool,
+				Optional:    true,
+				DefaultFunc: schema.EnvDefaultFunc("INSECURE", false),
+				Description: "The parameter that defines the establishment of a secure connection",
 			},
 			"token": {
 				Type:        schema.TypeString,
@@ -118,7 +131,10 @@ func Provider() *schema.Provider {
 func providerConfigure(d *schema.ResourceData, terraformVersion string) (interface{}, diag.Diagnostics) {
 	config := Config{
 		Token:            d.Get("token").(string),
-		CertPath:         d.Get("cert_path").(string),
+		CaCert:           d.Get("ca_cert").(string),
+		Cert:             d.Get("cert").(string),
+		CertKey:          d.Get("cert_key").(string),
+		Insecure:         d.Get("insecure").(bool),
 		APIEndpoint:      d.Get("api_endpoint").(string),
 		ClientID:         d.Get("client_id").(string),
 		TerraformVersion: terraformVersion,
