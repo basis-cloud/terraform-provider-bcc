@@ -11,7 +11,9 @@ import (
 
 type Config struct {
 	Token            string
+	CaCert           string
 	Cert             string
+	CertKey          string
 	Insecure         bool
 	APIEndpoint      string
 	TerraformVersion string
@@ -28,7 +30,7 @@ func (c *Config) Client() (*CombinedConfig, diag.Diagnostics) {
 	logger := logrus.New()
 	logger.SetLevel(logrus.DebugLevel)
 
-	manager, err := bcc.NewManager(c.Token, c.Cert, c.Insecure)
+	manager, err := bcc.NewManager(c.Token, c.CaCert, c.Cert, c.CertKey, c.Insecure)
 	if err != nil {
 		return nil, diag.Errorf("Error in create Manager: %s", err)
 	}
