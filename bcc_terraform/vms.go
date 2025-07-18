@@ -99,13 +99,12 @@ func (args *Arguments) injectCreateVm() {
 			Elem:        &schema.Schema{Type: schema.TypeString},
 		},
 		"networks": {
-			Type:         schema.TypeList,
-			Optional:     true,
-			Computed:     true,
-			ExactlyOneOf: []string{"ports", "networks"},
-			MinItems:     1,
-			MaxItems:     10,
-			Description:  "List of Ports connected to the Vm",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Computed:    true,
+			MinItems:    1,
+			MaxItems:    10,
+			Description: "List of Ports connected to the Vm",
 			Elem: &schema.Resource{
 				Schema: map[string]*schema.Schema{
 					"id": {
