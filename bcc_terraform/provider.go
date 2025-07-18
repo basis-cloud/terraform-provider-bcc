@@ -12,7 +12,7 @@ func Provider() *schema.Provider {
 			"ca_cert": {
 				Type:        schema.TypeString,
 				Optional:    true,
-				DefaultFunc: schema.EnvDefaultFunc("BASIS_ROOT_CERT", ""),
+				DefaultFunc: schema.EnvDefaultFunc("ROOT_CERT", ""),
 				Description: "BASIS Root CA certificate",
 			},
 			"cert": {

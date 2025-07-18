@@ -63,6 +63,7 @@ func (args *Arguments) injectCreateKubernetes() {
 		"floating": {
 			Type:        schema.TypeBool,
 			Required:    true,
+			Default:     false,
 			Description: "enable floating ip for the kubernetes",
 		},
 		"floating_ip": {

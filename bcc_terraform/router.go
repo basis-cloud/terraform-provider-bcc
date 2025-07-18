@@ -79,7 +79,7 @@ func (args *Arguments) injectCreateRouter() {
 		"floating": {
 			Type:        schema.TypeBool,
 			Optional:    true,
-			Default:     true,
+			Default:     false,
 			Description: "Enable floating ip for the Vm",
 		},
 		"floating_id": {

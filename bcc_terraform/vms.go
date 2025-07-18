@@ -123,7 +123,7 @@ func (args *Arguments) injectCreateVm() {
 		"floating": {
 			Type:        schema.TypeBool,
 			Optional:    true,
-			Default:     true,
+			Default:     false,
 			Description: "enable floating ip for the Vm",
 		},
 		"floating_ip": {
