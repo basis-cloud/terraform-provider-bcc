@@ -32,7 +32,14 @@ func dataSourceFirewallTemplatesRead(ctx context.Context, d *schema.ResourceData
 		return diag.Errorf("Error retrieving firewall templates: %s", err)
 	}
 
-	flattenedRecords := make([]map[string]interface{}, len(allFirewallTemplates))
+	var flattenedRecords []map[string]interface{}
+	for _, ft := range allFirewallTemplates {
+		record := map[string]interface{}{
+			"id":   ft.ID,
+			"name": ft.Name,
+		}
+		flattenedRecords = append(flattenedRecords, record)
+	}
 
 	hash, err := hashstructure.Hash(allFirewallTemplates, hashstructure.FormatV2, nil)
 	if err != nil {
