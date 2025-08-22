@@ -52,6 +52,8 @@ func dataSourceLbaasRead(ctx context.Context, d *schema.ResourceData, meta inter
 	if targetLbaas.Floating != nil {
 		flatten["floating"] = true
 		flatten["floating_ip"] = targetLbaas.Floating.IpAddress
+	} else {
+		flatten["floating"] = false
 	}
 
 	if err := setResourceDataFromMap(d, flatten); err != nil {

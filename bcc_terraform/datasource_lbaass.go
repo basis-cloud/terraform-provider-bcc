@@ -42,6 +42,8 @@ func dataSourceLoadBalancersRead(ctx context.Context, d *schema.ResourceData, me
 		if lb.Floating != nil {
 			flattenedRecords[i]["floating"] = true
 			flattenedRecords[i]["floating_ip"] = lb.Floating.IpAddress
+		} else {
+			flattenedRecords[i]["floating"] = false
 		}
 	}
 
