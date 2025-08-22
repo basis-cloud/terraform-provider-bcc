@@ -34,6 +34,16 @@ func dataSourceVmsRead(ctx context.Context, d *schema.ResourceData, meta interfa
 
 	flattenedRecords := make([]map[string]interface{}, len(allVms))
 	for i, vm := range allVms {
+		var portsSlice []map[string]interface{}
+
+		for _, port := range vm.Ports {
+			portMap := map[string]interface{}{
+				"id":         port.ID,
+				"ip_address": port.IpAddress,
+			}
+			portsSlice = append(portsSlice, portMap)
+		}
+
 		flattenedRecords[i] = map[string]interface{}{
 			"id":            vm.ID,
 			"name":          vm.Name,
@@ -44,6 +54,7 @@ func dataSourceVmsRead(ctx context.Context, d *schema.ResourceData, meta interfa
 			"power":         vm.Power,
 			"floating":      nil,
 			"floating_ip":   nil,
+			"ports":         portsSlice,
 		}
 
 		if vm.Floating != nil {
