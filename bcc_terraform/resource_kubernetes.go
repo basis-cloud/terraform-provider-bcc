@@ -180,8 +180,8 @@ func resourceKubernetesUpdate(ctx context.Context, d *schema.ResourceData, meta 
 	if err != nil {
 		return diag.Errorf("storage_profile_id: Error storage profile %s not found", userPublicKey)
 	}
-	kubernetes.NodeRam = d.Get("node_cpu").(int)
-	kubernetes.NodeCpu = d.Get("node_ram").(int)
+	kubernetes.NodeRam = d.Get("node_ram").(int)
+	kubernetes.NodeCpu = d.Get("node_cpu").(int)
 	kubernetes.UserPublicKey = pub_key.ID
 	kubernetes.NodeStorageProfile = storage_profile
 	kubernetes.NodeDiskSize = d.Get("node_disk_size").(int)
