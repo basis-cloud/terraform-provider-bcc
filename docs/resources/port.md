@@ -52,8 +52,8 @@ resource "basis_port" "router_port" {
 
 ### Required
 
-- **network_id** String) id of the Network
 - **vdc_id** (String) id of the VDC
+- **network_id** String) id of the Network
 
 ### Optional
 

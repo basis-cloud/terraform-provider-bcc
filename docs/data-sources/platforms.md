@@ -26,6 +26,10 @@ data "basis_platforms" "platforms"{
 
 ## Schema
 
+### Required
+
+- **vdc_id** (String) id of the VDC
+
 ### Read-Only
 
 - **platforms** (List of Object) (see [below for nested schema](#nestedatt--projects))

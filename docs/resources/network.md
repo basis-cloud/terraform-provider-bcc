@@ -54,11 +54,11 @@ resource "basis_network" "network2" {
 Required:
 
 - **cidr** (String) cidr of the Subnet
-- **dhcp** (Boolean) enable dhcp service of the Subnet
-- **dns** (List of String) dns servers list
-- **end_ip** (String) pool end ip of the Subnet
 - **gateway** (String) gateway of the Subnet
 - **start_ip** (String) pool start ip of the Subnet
+- **end_ip** (String) pool end ip of the Subnet
+- **dhcp** (Boolean) enable dhcp service of the Subnet
+- **dns** (List of String) dns servers list
 
 Read-Only:
 

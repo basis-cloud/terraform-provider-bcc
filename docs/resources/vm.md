@@ -93,29 +93,30 @@ resource "basis_vm" "vm1" {
 
 ### Required
 
-- **cpu** (Integer) the number of virtual cpus
-- **system_disk** System disk (Min: 1, Max: 1).   (see [below for nested schema](#nestedblock--system_disk))
-- **name** (String) name of the Vm
-- **ports** (List of String) list of Ports id attached to the Vm. 
-- **networks** (Block List)    (see [below for nested schema](#nestedblock--network))
-- **ram** (Float) memory of the Vm in gigabytes
 - **template_id** (String) id of the Template
-- **user_data** (String) script for cloud-init
 - **vdc_id** (String) id of the VDC
+- **name** (String) name of the Vm
+- **cpu** (Integer) the number of virtual cpus
+- **ram** (Float) memory of the Vm in gigabytes
+- **user_data** (String) script for cloud-init
+- **system_disk** System disk (Min: 1, Max: 1).   (see [below for nested schema](#nestedblock--system_disk))
 
 ### Optional
 
 - **floating** (Boolean) enable floating ip for the Vm
-- **timeouts** (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 - **disks** (Toset, String) list of Disks id attached to the Vm.
 - **power** (Boolean) the vm state
 - **tags** (Toset, String) list of Tags added to the Vm
+- **ports** (List of String) list of Ports id attached to the Vm.
+- **networks** (Block List)    (see [below for nested schema](#nestedblock--network))
 
 
 ### Read-Only
 
 - **floating_ip** (String) floating ip for the Vm. May be omitted
 - **id** (String) The ID of this resource.
+
+
 
 <a id="nestedblock--system_disk"></a>
 ### Nested Schema for `system_disk`
@@ -125,15 +126,11 @@ Required:
 - **size** (Integer) the size of the Disk in gigabytes
 - **storage_profile_id** (String) Id of the storage profile
 
-Optional:
-
-- **timeouts** (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
-
 Read-Only:
 
 - **id** (String) id of the Disk
 - **name** (String) name of the Disk
-
+- **external_id** (String) the external id of the Disk used at hypervisor
 
 <a id="nestedblock--network"></a>
 ### Nested Schema for `network`

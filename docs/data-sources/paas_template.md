@@ -8,23 +8,29 @@ Get information about a PaaS Service Template for use in other resources.
 ## Example Usage
 
 ```hcl
-
-data "basis_project" "single_project" {
-    name = "Terraform Project"
+resource "basis_project" "project" {
+  name = "terraform paas"
 }
 
-data "basis_paas_template" "paas_template" {
-  id = 1
-  project_id = data.basis_project.single_project.id
+data "basis_hypervisor" "hypervisor" {
+  project_id = resource.basis_project.project.id
+  name = "Рустэк"
+}
+
+resource "basis_vdc" "vdc_rustack" {
+  name = "terraform Рустэк"
+  project_id = resource.basis_project.project.id
+  hypervisor_id = data.basis_hypervisor.hypervisor.id
+}
+
+data "basis_paas_template" "nginx_template" {
+  id = 5
+  vdc_id = resource.basis_vdc.vdc_rustack.id
 }
 ```
 ## Schema
 
 ### Required
 
-- **project_id** (String) id of Project
-- **id** (String) id of PaaS Service Template
-
-### Read-Only
-
-- **name** (String) name of PaaS Service Template
+- **name** (String) name of the disk `or` **id** (String) id of the disk
+- **vdc_id** (String) id of the VDC

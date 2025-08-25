@@ -74,11 +74,11 @@ output "dashboard_url" {
 
 ### Required
 
+- **template_id** (String) id of the Template
 - **vdc_id** (String) id of the VDC
 - **name** (String) name of the Kubernetes
 - **node_cpu** (Integer) the number virtual cpus of the Vm
 - **node_ram** (Integer) memory of the Vm in gigabytes
-- **template_id** (String) id of the Template
 - **platform** (String) id of the Template `(this field only for vmware hypervisor)`
 - **nodes_count** (Integer) id of the Template
 - **node_disk_size** (Integer) Size of disk in Kubernetes node
@@ -88,15 +88,15 @@ output "dashboard_url" {
 ### Optional
 
 - **floating** (Boolean) enable floating ip for the Kubernetes
-- **timeouts** (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 - **tags** (Toset, String) list of Tags added to the Kubernetes.
-
+- **vms** (List, String) List of Vms connected to the kubernetes
 
 ### Read-Only
 
 - **floating_ip** (String) floating ip for the Vm. May be omitted
 - **id** (String) The ID of this resource.
 - **dashboard_url** (String) URL to access kubernetes dashboard
+
 
 ## Getting information about kubernetes
 

@@ -42,11 +42,11 @@ data "basis_vm" "single_vm" {
 ### Read-Only
 
 - **cpu** (Integer) the number of virtual cpus
-- **floating** (Boolean) enable floating ip for the Vm
-- **floating_ip** (String) floating_ip of the Vm. May be omitted
 - **ram** (Float) memory of the Vm in gigabytes
 - **template_id** (String) id of the Template
 - **template_name** (String) name of the Template
+- **floating** (Boolean) enable floating ip for the Vm
+- **floating_ip** (String) floating_ip of the Vm. May be omitted
 - **power** (Boolean) the vm state
 - **ports** (Block List)    (see [below for nested schema](#nestedblock--port))
 

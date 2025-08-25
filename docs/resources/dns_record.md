@@ -45,23 +45,15 @@ resource "basis_dns_record" "dns_record1" {
 
 > for type MX parameters are required to
 
-- **Priority** (String) Priority of Dns record
+- **priority** (String) Priority of Dns record
 
 > for type SRV parameters are required to
 
-- **Priority** (String) Priority of Dns record
-- **Weight** (String) Weight of Dns record
-- **Port** (String) Port of Dns record
+- **priority** (String) Priority of Dns record
+- **weight** (String) Weight of Dns record
+- **port** (String) Port of Dns record
 
 ### Optional
 
 - **id** (String) The ID of this resource.
-- **timeouts** (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
-
-<a id="nestedblock--timeouts"></a>
-### Nested Schema for `timeouts`
-
-Optional:
-
-- **create** (String)
-- **delete** (String)
+- **ttl** (Integer) 

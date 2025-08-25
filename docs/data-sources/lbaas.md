@@ -42,12 +42,7 @@ data "basis_lbaas" "test" {
 
 ### Read-Only
 
-- **lbaas** (List of Object) (see [below for nested schema](#nestedatt--lbaas))
+- **floating** (Boolean) bool flag for public ip
+- **floating_ip** (String)
 
-<a id="nestedatt--lbaas"></a>
-### Nested Schema for `lbaas`
 
-Read-Only:
-
-- **floating** (Boolean)
-- **name** (String)

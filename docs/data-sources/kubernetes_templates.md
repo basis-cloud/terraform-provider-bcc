@@ -44,7 +44,8 @@ data "basis_kubernetes_templates" "k8s_template" {
 Read-Only:
 
 - **id** (String)
+- **name** (String)
 - **min_node_cpu** (Integer)
 - **min_node_hdd** (Integer)
 - **min_node_ram** (Integer)
-- **name** (String)
+

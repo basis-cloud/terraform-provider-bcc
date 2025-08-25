@@ -35,7 +35,6 @@ resource "basis_vdc" "vdc1" {
 ### Optional
 
 - **id** (String) The ID of this resource.
-- **timeouts** (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 - **tags** (Toset, String) list of Tags added to the VDC.
 - **default_network_mtu** (Integer) maximum transmission unit for the default network of the vdc
 
@@ -45,23 +44,14 @@ resource "basis_vdc" "vdc1" {
 - **default_network_name** (String) name of the default network of the vdc
 - **default_network_subnets** (Block List) (see [below for nested schema](#nestedblock--subnets))
 
-<a id="nestedblock--timeouts"></a>
-### Nested Schema for `timeouts`
-
-Optional:
-
-- **create** (String)
-- **delete** (String)
-
 <a id="nestedblock--subnets"></a>
 ### Nested Schema for `subnets`
 
 Read-Only:
-
+- **id** (String)
 - **cidr** (String)
+- **gateway** (String)
+- **start_ip** (String)
+- **end_ip** (String)
 - **dhcp** (Boolean)
 - **dns** (List of String)
-- **end_ip** (String)
-- **gateway** (String)
-- **id** (String)
-- **start_ip** (String)

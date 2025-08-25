@@ -36,3 +36,7 @@ resource "basis_firewall_template" "single_template" {
 ### Optional
 
 - **tags** (Toset, String) list of Tags added to the FirewallTemplate
+
+### Read-Only
+
+- **id** (String) id of the Disk
