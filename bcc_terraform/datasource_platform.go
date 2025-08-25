@@ -10,7 +10,6 @@ import (
 
 func dataSourcePlatform() *schema.Resource {
 	args := Defaults()
-	args.injectResultPlatform()
 	args.injectContextVdcById()
 	args.injectContextGetPlatform() // override name
 

@@ -10,7 +10,6 @@ import (
 
 func dataSourceFirewallTemplate() *schema.Resource {
 	args := Defaults()
-	args.injectResultFirewallTemplate()
 	args.injectContextVdcById()
 	args.injectContextGetFirewallTemplate() // override name
 

@@ -11,7 +11,6 @@ import (
 func dataSourceRouter() *schema.Resource {
 	args := Defaults()
 	args.injectContextVdcById()
-	args.injectResultRouter()
 	args.injectContextGetRouter()
 
 	return &schema.Resource{

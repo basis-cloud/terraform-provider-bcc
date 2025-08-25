@@ -11,7 +11,6 @@ import (
 func dataSourceDns() *schema.Resource {
 	args := Defaults()
 	args.injectContextProjectById()
-	args.injectResultDns()
 	args.injectContextGetDns() // override name
 
 	return &schema.Resource{
