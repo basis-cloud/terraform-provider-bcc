@@ -10,6 +10,7 @@ import (
 
 func dataSourceProject() *schema.Resource {
 	args := Defaults()
+	// refactor me
 	args.injectResultProject()
 	args.injectContextGetProject()
 
