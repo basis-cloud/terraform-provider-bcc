@@ -81,7 +81,6 @@ func Provider() *schema.Provider {
 			"basis_dnss":                 dataSourceDnss(),                // 028-data-get-dnss +
 			"basis_lbaas":                dataSourceLbaas(),               // 028-data-get-lbaas +
 			"basis_lbaass":               dataSourceLoadBalancers(),       // 028-data-get-lbaass +
-			"basis_s3":                   dataSourceLoadBalancers(),       // 028-data-get-lbaass +
 			"basis_s3_storage":           dataSourceS3Storage(),           // 028-data-get-s3-storage +
 			"basis_s3_storages":          dataSourceS3Storages(),          // 028-data-get-s3-storages +
 			"basis_kubernetes":           dataSourceKubernetes(),          // 030-resource-get-kubernetes +
