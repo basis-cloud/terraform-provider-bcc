@@ -224,6 +224,10 @@ func resourceVmUpdate(ctx context.Context, d *schema.ResourceData, meta interfac
 		needPowerOn = true
 	}
 
+	if diags := syncPorts(d, manager, targetVdc, vm); diags.HasError() {
+		return diags
+	}
+
 	if d.HasChange("floating") {
 		needUpdate = true
 		if !d.Get("floating").(bool) {
@@ -256,10 +260,6 @@ func resourceVmUpdate(ctx context.Context, d *schema.ResourceData, meta interfac
 	}
 
 	if diags := syncDisks(d, manager, targetVdc, vm); diags.HasError() {
-		return diags
-	}
-
-	if diags := syncPorts(d, manager, targetVdc, vm); diags.HasError() {
 		return diags
 	}
 
