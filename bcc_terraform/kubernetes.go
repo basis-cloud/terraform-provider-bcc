@@ -45,9 +45,9 @@ func (args *Arguments) injectCreateKubernetes() {
 		},
 		"platform": {
 			Type:        schema.TypeString,
-			Optional:    true,
+			Required:    true,
 			ForceNew:    true,
-			Description: "the number of virtual cpus",
+			Description: "type of cpu platform",
 		},
 		"node_cpu": {
 			Type:         schema.TypeInt,
@@ -147,15 +147,15 @@ func (args *Arguments) injectResultKubernetes() {
 			Computed:    true,
 			Description: "floating ip for the kubernetes. May be omitted",
 		},
-		"node_disk_size": {
-			Type:        schema.TypeInt,
-			Computed:    true,
-			Description: "size in gb for the vms disk attached to kubernetes.",
-		},
 		"nodes_count": {
 			Type:        schema.TypeInt,
 			Computed:    true,
 			Description: "count of vms attached to kubernetes",
+		},
+		"node_disk_size": {
+			Type:        schema.TypeInt,
+			Computed:    true,
+			Description: "size in gb for the vms disk attached to kubernetes.",
 		},
 		"user_public_key_id": {
 			Type:        schema.TypeString,
