@@ -34,6 +34,4 @@ data "basis_firewall_template" "single_template" {
 - **name** (String) name of the Template `or` **id** (String) id of the Template
 - **vdc_id** (String) id of the VDC
 
-### Read-Only
 
-- **id** (String) id of the Template

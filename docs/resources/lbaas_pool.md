@@ -82,16 +82,17 @@ resource "basis_lbaas_pool" "pool" {
 - **protocol** (String) method of LoadBalancerPool
 > Can be chosen TCP, HTTP, HTTPS
 - **connlimit** (Integer) connlimit of LoadBalancerPool
-- **timeouts** (Block, Optional)
+- **cookie_name** (String)
+- **session_persistence** (String)
 
 <a id="nestedblock--member"></a>
 ### Nested Schema for `member`
 
 Required:
 
-- **port** (Integer) id of the Network
-- **vm_id** (String) id of the Network
+- **port** (Integer) 
+- **vm_id** (String) 
 
 Optional:
 
-- **weight** (Integer) id of the Network
+- **weight** (Integer) 

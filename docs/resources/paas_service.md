@@ -8,30 +8,52 @@ Provides a Basis PaaS Service resource.
 ## Example Usage
 
 ```hcl
-data "basis_project" "single_project" {
-    name = "Terraform Project"
+resource "basis_project" "project" {
+  name = "terraform paas"
 }
 
-resource "basis_paas_service" "service" {
-  name = "terraform paas service"
-  project_id = data.basis_project.single_project.id
-  paas_service_id = 1
+data "basis_hypervisor" "hypervisor" {
+  project_id = resource.basis_project.project.id
+  name = "Рустэк"
+}
+
+resource "basis_vdc" "vdc_rustack" {
+  name = "terraform Рустэк"
+  project_id = resource.basis_project.project.id
+  hypervisor_id = data.basis_hypervisor.hypervisor.id
+}
+
+data "basis_paas_template" "nginx_template" {
+  id = 5
+  vdc_id = resource.basis_vdc.vdc_rustack.id
+}
+
+resource "basis_paas_service" "db_service" {
+  name = "test_paas"
+  vdc_id = resource.basis_vdc.vdc_rustack.id
+  paas_service_id = data.basis_paas_template.nginx_template.id
   paas_service_inputs = jsonencode({
-    "change_password": false,
-    "enable_ssh_password":true,
-    "enable_sudo":true,
-    "passwordless_sudo":false,
-    "cpu_num":1,
-    "ram_size":1,
-    "volume_size":10,
-    "network_id":"c7ec518c-a62c-42cc-adee-9cf731d066e4",
-    "vdcs_id":"e9da805f-04c3-4a93-9542-9724486bebe0",
-    "vm_name":"vm name",
-    "template_id":"4c8b06e6-7909-4fb9-9097-6ff900a848d0",
-    "storage_profile":"0e1aead5-ef4b-46e2-b988-64dea6d146f8",
-    "firewall_profiles":["85929e4e-d12d-411a-9763-b3f8c3d279a0","dc4203e4-d7fe-45f0-91b8-a33128e1a089"],
-    "user_name":"ubuntu",
-    "user_password":"ubuntu"
+    "vdcs_id": "58dce2a8-6778-4bb7-8257-05917ee148b3",
+    "vm_name": "test_paas_vm",
+    "cpu_num": 2,
+    "ram_size": 4,
+    "storage_profile": "a4d7f671-b778-45d2-86e3-c22e8080b083",
+    "volume_size": 10,
+    "firewall_profiles": [
+      "b759aab1-0c55-4e93-b79c-86fafedf11c9",
+      "2d7120b8-b02c-43cd-bfa6-421d887a6fdb",
+      "b72b8dac-3063-485b-9d10-09f5e2b8ab49",
+      "c516c513-5d51-4632-819c-65b064889117",
+      "00000000-0000-0000-0000-000000000000"
+    ],
+    "network_name": "d60fb2c2-d8a0-4f88-a5bc-97d4d3d7727c",
+    "username": "test_paas_user",
+    "password": "test_paas_user",
+    "ssh_public_key": "",
+    "template_name": "110ad34a-f8dc-4b37-af08-6e936f9472c3",
+    "enable_ssh_password": true,
+    "enable_sudo": true,
+    "passwordless_sudo": true
   })
 }
 
@@ -41,10 +63,10 @@ resource "basis_paas_service" "service" {
 
 ### Required
 
-- **project_id** (String) id of Project
+- **vdc_id** (String) id of the VDC
 - **name** (String) name of PaaS Service
 - **paas_service_id** (String) id of PaaS Service Template
-- **paas_service_id** (String) id of PaaS Service Template
+- **paas_service_inputs** (String) inputs of Paas Service as JSON object
 
 
 ### Read-Only

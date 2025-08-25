@@ -37,6 +37,4 @@ If both fields are specified (ip_address , id) search will be carried out by **i
 
 ### Read-Only
 
-- **network_id** (String) id of the Network
-- **firewall_templates** (List of String) list of firewall rule ids of the Port
-
+- **network** (String) id of the Network

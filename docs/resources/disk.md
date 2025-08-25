@@ -37,22 +37,16 @@ resource "basis_disk" "disk2" {
 
 ### Required
 
-- **name** (String) name of the Disk
-- **size** (Integer) the size of the Disk in gigabytes
 - **storage_profile_id** (String) Id of the storage profile
 - **vdc_id** (String) id of the VDC
+- **name** (String) name of the Disk
+- **size** (Integer) the size of the Disk in gigabytes
 
 ### Optional
 
-- **timeouts** (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 - **tags** (Toset, String) list of Tags added to the Disk.
 
 ### Read-Only
 
 - **id** (String) id of the Disk
 - **external_id** (String) the external id of the Disk used at hypervisor
-
-Optional:
-
-- **create** (String)
-- **delete** (String)

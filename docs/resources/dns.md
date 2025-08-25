@@ -28,14 +28,8 @@ resource "basis_dns" "dns" {
 
 ### Optional
 
-- **id** (String) The ID of this resource.
 - **tags** (Toset, String) list of Tags added to the Dns
-- **timeouts** (Block, Optional) (see [below for nested schema](#nestedblock--timeouts))
 
-<a id="nestedblock--timeouts"></a>
-### Nested Schema for `timeouts`
+### Read-Only
 
-Optional:
-
-- **create** (String)
-- **delete** (String)
+- **id** (String) id of the Disk

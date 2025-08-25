@@ -24,5 +24,4 @@ resource "basis_project" "demo_project" {
 
 ### Optional
 
-- **id** (String) The ID of this resource.
 - **tags** (Toset, String) list of Tags added to the Project

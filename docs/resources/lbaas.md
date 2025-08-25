@@ -39,14 +39,19 @@ resource "basis_lbaas" "lbaas" {
 
 - **vdc_id** (String) id of Vdc
 - **name** (String) name of LoadBalancer
-- **Port** (String) parameter that specifies which network will be connected to LoadBalancer  (see [below for nested schema](#nestedblock--port))
+- **port** (String) parameter that specifies which network will be connected to LoadBalancer  (see [below for nested schema](#nestedblock--port))
 
 
 ### Optional
 
 - **floating** (Boolean) enable floating ip for the LoadBalancer.
 - **tags** (Toset, String) list of Tags added to the LoadBalancer.
-- **timeouts** (Block, Optional)
+
+### Read-Only
+
+- **id** (String) id of the Disk
+- **floating_ip** (String) value of public ip address
+
 
 <a id="nestedblock--port"></a>
 ### Nested Schema for `port`

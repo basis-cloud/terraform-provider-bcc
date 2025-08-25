@@ -27,3 +27,4 @@ data "basis_platform" "platform"{
 ### Required
 
 - **name** (String) name of the Platform `or` **id** (String) id of the Platform
+- **vdc_id** (String) id of the VDC

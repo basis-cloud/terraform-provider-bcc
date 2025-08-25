@@ -50,12 +50,12 @@ resource "basis_router" "new_router" {
 
 ### Required
 
-- **name** (String) name of the Network
-- **ports** (Toset, String) list of Ports id attached to the Router.
 - **vdc_id** (String) id of the VDC
 
 ### Optional
 
+- **name** (String) name of the Network
+- **ports** (Toset, String) list of Ports id attached to the Router.
 - **system** (Bool) let terraform treat system router properly. False by default. There can be only 1 router with the system = ture
 - **floating** (Bool) enable floating ip for the Router. True by default.
 - **is_default** (Bool) Set up this option to set router by default.

@@ -44,6 +44,12 @@ resource "basis_firewall_template_rule" "rule_1" {
    Can be chosen **ingress**, **egress**
 - **protocol** (String) protocol of the FirewallRule.
    Can be chosen **tcp**, **udp**, **icmp**, **any**
+- **destination_ip** (String) destination ip address
+- **port_range** (String) max range of port
 
 > for protocols **tcp** and **udp** parameters are required to
   **port_range** (String) The range of ports can be only a single **number** and **{number}:{number}** or can be empty 
+
+### Read-Only
+
+- **id** (String) id of the Disk
