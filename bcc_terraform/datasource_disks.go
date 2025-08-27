@@ -40,6 +40,7 @@ func dataSourceDisksRead(ctx context.Context, d *schema.ResourceData, meta inter
 			"size":                 disk.Size,
 			"storage_profile_id":   disk.StorageProfile.ID,
 			"storage_profile_name": disk.StorageProfile.Name,
+			"external_id":          disk.ExternalID,
 		}
 	}
 
