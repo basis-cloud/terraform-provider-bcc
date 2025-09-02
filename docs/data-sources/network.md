@@ -35,7 +35,6 @@ data "basis_network" "single_network" {
 
 ### Read-Only
 
-
 - **mtu** (Integer) maximum transmission unit for the Network
 - **subnets** (List of Object) list of subnets (see [below for nested schema](#nestedatt--subnets))
 

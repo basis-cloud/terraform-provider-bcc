@@ -11,7 +11,7 @@ import (
 func dataSourceFirewallTemplate() *schema.Resource {
 	args := Defaults()
 	args.injectContextVdcById()
-	args.injectContextGetFirewallTemplate() // override name
+	args.injectContextGetFirewallTemplate()
 
 	return &schema.Resource{
 		ReadContext: dataSourceFirewallTemplateRead,
