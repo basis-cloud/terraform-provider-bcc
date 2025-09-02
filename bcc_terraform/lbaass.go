@@ -125,7 +125,7 @@ func (args *Arguments) injectResultLbaas() {
 
 func (args *Arguments) injectResultListLbaas() {
 	s := Defaults()
-	s.injectResultVm()
+	s.injectResultLbaas()
 
 	args.merge(Arguments{
 		"lbaass": {

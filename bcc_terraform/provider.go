@@ -13,19 +13,19 @@ func Provider() *schema.Provider {
 				Type:        schema.TypeString,
 				Optional:    true,
 				DefaultFunc: schema.EnvDefaultFunc("ROOT_CERT", ""),
-				Description: "BASIS Root CA certificate",
+				Description: "Root CA certificate",
 			},
 			"cert": {
 				Type:        schema.TypeString,
 				Optional:    true,
 				DefaultFunc: schema.EnvDefaultFunc("SERVER_API_CERT", ""),
-				Description: "Server certificate, cannot be used without CA_cert",
+				Description: "Client certificate, cannot be used without CA_cert",
 			},
 			"cert_key": {
 				Type:        schema.TypeString,
 				Optional:    true,
 				DefaultFunc: schema.EnvDefaultFunc("SERVER_CERT_KEY", ""),
-				Description: "RSA key for server certificate",
+				Description: "RSA key for client certificate",
 			},
 			"insecure": {
 				Type:        schema.TypeBool,
