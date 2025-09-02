@@ -44,6 +44,7 @@ Read-Only:
 
 - **id** (String)
 - **name** (String)
-- **size** (Integer)
-- **storage_profile_id** (String)
-- **storage_profile_name** (String)
+- **size** (Integer) the size of the Disk in gigabytes
+- **storage_profile_id** (String) the id of the StorageProfile
+- **storage_profile_name** (String) the name of the StorageProfile
+- **external_id** (String) the external id of the Disk used at hypervisor

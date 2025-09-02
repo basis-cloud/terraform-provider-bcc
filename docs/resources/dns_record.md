@@ -55,5 +55,6 @@ resource "basis_dns_record" "dns_record1" {
 
 ### Optional
 
-- **id** (String) The ID of this resource.
 - **ttl** (Integer) 
+
+### Read-Only

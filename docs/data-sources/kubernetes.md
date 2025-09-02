@@ -41,6 +41,17 @@ data "basis_kubernetes" "single_k8s" {
 
 ### Read-Only
 
+- **node_cpu** (Integer) the number of virtual cpus
+- **node_ram** (Integer) the number of ram of the attached vms in Kubernetes
+- **template_id** (String) id of the Template
+- **floating** (Boolean) enable floating ip for the Kubernetes
+- **floating_ip** (String) floating_ip of the Kubernetes. May be omitted
+- **nodes_count** (String) vms count of the Kubernetes
+- **node_disk_size** (String) disk size of the attached vms in Kubernetes
+- **user_public_key_id** (String) public key of the Kubernetes
+- **node_storage_profile_id** (String) storage profile id of the attached vms in Kubernetes
+- **vms** (List) List of vms attached to Kubernetes
+- **dashboard_url** (String) dashboard url of the Kubernetes
 
 
 ## Getting information about kubernetes
