@@ -5,7 +5,7 @@ go 1.21
 toolchain go1.21.1
 
 require (
-	github.com/basis-cloud/bcc-go v0.3.2
+	github.com/basis-cloud/bcc-go v0.4.1
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.30.0
 	github.com/mitchellh/hashstructure/v2 v2.0.2
 	github.com/pkg/errors v0.9.1
