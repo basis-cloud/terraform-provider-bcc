@@ -28,22 +28,17 @@ data "basis_network" "service_network" {
 
 data "basis_storage_profile" "ssd" {
     vdc_id = data.basis_vdc.single_vdc.id
-    name = "ssd"
-}
-
-data "basis_storage_profile" "sas" {
-    vdc_id = data.basis_vdc.single_vdc.id
-    name = "sas"
+    name = "SSD"
 }
 
 data "basis_template" "debian10" {
     vdc_id = data.basis_vdc.single_vdc.id
-    name = "Debian 10"
+    name = "Ubuntu 22.04"
 }
 
 data "basis_firewall_template" "allow_default" {
     vdc_id = data.basis_vdc.single_vdc.id
-    name = "По-умолчанию"
+    name = "Разрешить исходящие"
 }
 
 data "basis_firewall_template" "allow_web" {
@@ -56,50 +51,51 @@ data "basis_firewall_template" "allow_ssh" {
     name = "Разрешить SSH"
 }
 
-data "basis_disk" "new_disk1" {
+data "basis_disk" "disk1" {
     vdc_id = data.basis_vdc.single_vdc.id
-    name = "Disk 1"
+    name = "Диск 1"
 }
 
-data "basis_disk" "new_disk2" {
+data "basis_disk" "disk2" {
     vdc_id = data.basis_vdc.single_vdc.id
-    name = "Disk 2"
+    name = "Диск 2"
 }
 
 resource "basis_port" "vm_port" {
-    vdc_id = resource.basis_vdc.vdc1.id
+    vdc_id = data.basis_vdc.single_vdc.id
+
     network_id = data.basis_network.service_network.id
-    firewall_templates = [
-        data.basis_firewall_template.allow_default.id,
-        data.basis_firewall_template.allow_web.id,
-        data.basis_firewall_template.allow_ssh.id
-    ]
+    firewall_templates = [data.basis_firewall_template.allow_default.id,
+                          data.basis_firewall_template.allow_web.id,
+                          data.basis_firewall_template.allow_ssh.id]
 }
 
 resource "basis_vm" "vm1" {
     vdc_id = data.basis_vdc.single_vdc.id
 
-    name = "Сервер 1"
+    name = "Server 1"
     cpu = 2
     ram = 4
 
     template_id = data.basis_template.debian10.id
 
-    user_data = "${file("user_data.yaml")}"
+    user_data = file("user_data.yaml")
 
     system_disk {
         size = 10
         storage_profile_id = data.basis_storage_profile.ssd.id
     }
-    
+
     disks = [
-        data.basis_disk.new_disk1.id,
-        data.basis_disk.new_disk2.id,
-    ]
+        data.basis_disk.disk1.id,
+        data.basis_disk.disk2.id,
+    ]      
+    
+    networks {
+        id = resource.basis_port.vm_port.id
+    } 
 
-    ports = [
-        resource.basis_port.vm_port.id
-    ]
-
+    power = true
     floating = false
+    tags = ["test"]
 }

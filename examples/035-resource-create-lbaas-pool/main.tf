@@ -60,7 +60,9 @@ resource "basis_vm" "vm" {
         storage_profile_id = data.basis_storage_profile.ssd.id
     }
 
-    ports = [resource.basis_port.vm_port.id]
+    networks {
+        id = resource.basis_port.vm_port.id
+    }
 
     floating = true
 }

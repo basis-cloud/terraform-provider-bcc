@@ -24,22 +24,17 @@ data "basis_network" "service_network" {
 
 data "basis_storage_profile" "ssd" {
     vdc_id = data.basis_vdc.single_vdc.id
-    name = "ssd"
-}
-
-data "basis_storage_profile" "sas" {
-    vdc_id = data.basis_vdc.single_vdc.id
-    name = "sas"
+    name = "SSD"
 }
 
 data "basis_template" "debian10" {
     vdc_id = data.basis_vdc.single_vdc.id
-    name = "Debian 10"
+    name = "Ubuntu 22.04"
 }
 
 data "basis_firewall_template" "allow_default" {
     vdc_id = data.basis_vdc.single_vdc.id
-    name = "По-умолчанию"
+    name = "Разрешить исходящие"
 }
 
 data "basis_firewall_template" "allow_web" {
@@ -52,11 +47,23 @@ data "basis_firewall_template" "allow_ssh" {
     name = "Разрешить SSH"
 }
 
-data "basis_port" "vm_port" {
-    vdc_id = resource.basis_vdc.single_vdc.id
+data "basis_disk" "disk1" {
+    vdc_id = data.basis_vdc.single_vdc.id
+    name = "Диск 1"
+}
 
-    network_id = resource.basis_network.network.id
-    firewall_templates = [data.basis_firewall_template.allow_default.id]
+data "basis_disk" "disk2" {
+    vdc_id = data.basis_vdc.single_vdc.id
+    name = "Диск 2"
+}
+
+resource "basis_port" "vm_port" {
+    vdc_id = data.basis_vdc.single_vdc.id
+
+    network_id = data.basis_network.service_network.id
+    firewall_templates = [data.basis_firewall_template.allow_default.id,
+                          data.basis_firewall_template.allow_web.id,
+                          data.basis_firewall_template.allow_ssh.id]
 }
 
 resource "basis_vm" "vm1" {
@@ -74,18 +81,19 @@ resource "basis_vm" "vm1" {
         size = 10
         storage_profile_id = data.basis_storage_profile.ssd.id
     }
-    
+
     disks = [
-        data.basis_disk.new_disk1.id,
-        data.basis_disk.new_disk2.id,
-    ]
+        data.basis_disk.disk1.id,
+        data.basis_disk.disk2.id,
+    ]      
+    
+    networks {
+        id = resource.basis_port.vm_port.id
+    } 
 
-    ports {
-        data.basis_port.vm_port
-    }
-
+    power = true
     floating = false
-    tags = ["created_by:terraform"]
+    tags = ["test"]
 }
 ```
 
@@ -99,7 +107,7 @@ resource "basis_vm" "vm1" {
 - **cpu** (Integer) the number of virtual cpus
 - **ram** (Float) memory of the Vm in gigabytes
 - **user_data** (String) script for cloud-init
-- **system_disk** System disk (Min: 1, Max: 1).   (see [below for nested schema](#nestedblock--system_disk))
+- **system_disk** System disk (Min: 1, Max: 1). (see [below for nested schema](#nestedblock--system_disk))
 
 ### Optional
 
@@ -107,9 +115,19 @@ resource "basis_vm" "vm1" {
 - **disks** (Toset, String) list of Disks id attached to the Vm.
 - **power** (Boolean) the vm state
 - **tags** (Toset, String) list of Tags added to the Vm
-- **ports** (List of String) list of Ports id attached to the Vm.
-- **networks** (Block List)    (see [below for nested schema](#nestedblock--network))
+- **networks** (Block List) a block with the ID of the port connected to the server. A separate `networks` block is set for each port (see [below for nested schema](#nestedblock--network)). If necessary, you can create a server without a network connection.
+  
+```hcl
+networks {
+    id = resource.basis_port.vm_port1.id
+}
 
+networks {
+    id = resource.basis_port.vm_port2.id
+}
+```
+  
+- (Deprecated) **ports** (List of String) list of Ports id attached to the Vm.
 
 ### Read-Only
 

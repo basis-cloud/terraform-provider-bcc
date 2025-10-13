@@ -18,7 +18,7 @@ data "basis_project" "single_project" {
 
 data "basis_vdc" "single_vdc" {
   project_id = data.basis_project.single_project.id
-  name       = "Terraform VDC"
+  name = "Terraform VDC"
 }
 
 data "basis_network" "service_network" {
@@ -49,7 +49,9 @@ resource "basis_vm" "vm1" {
         storage_profile_id = data.basis_storage_profile.ssd.id
     }
 
-    ports = [resource.basis_port.vm_port.id]
+    networks {
+        id = resource.basis_port.vm_port.id
+    }
 
     floating = true
 }
