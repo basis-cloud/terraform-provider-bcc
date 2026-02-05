@@ -1,42 +1,37 @@
----
-page_title: "BCC provider"
----
-# BCC provider
+# Quick Start
 
-The BCC provider is used to interact with the Basis cloud. 
-The provider needs to be configured with the proper credentials before it can be used.
+The provider is used for interaction between Terraform/OpenTofu and a cloud managed by BCC. To achieve this, the provider utilizes the BCC's API.
 
-Use the navigation to the left to read about the available resources.
+To authorize the provider, appropriate credentials must be provided.
 
-## Example Usage
+## Initialization example:
 
 ```hcl
 terraform {
   required_providers {
     basis = {
-      source  = "basis-cloud/bcc"
+      source  = "registry.opentofu.org/basis-cloud/bcc" # or registry.terraform.io/basis-cloud/bcc
+      version = ">= 2.2.0"
     }
   }
 }
 
-# Set the variable value in *.tfvars file
-# or using -var="basis_token=..." CLI option
-variable "basis_token" {}
-
-# Configure the BCC provider
 provider "basis" {
-    api_endpoint = "https://cp.iteco.cloud"
-    token = var.basis_token
+    api_endpoint = "URL of the cloud platform API"
+    token = "Cloud platform user token"
+    insecure = true
 }
 
 ```
 
--> **Note for Module Developers** Although provider configurations are shared between modules, each module must
-declare its own [provider requirements](https://www.terraform.io/docs/language/providers/requirements.html). See the [module development documentation](https://www.terraform.io/docs/language/modules/develop/providers.html) for additional information.
+**Schema. Required:**
 
-## Schema
+*   `api_endpoint` (String) — URL of the cloud platform API, e.g., https://dev.cloud.online;
+*   `token` (String) — user token for API operations.
 
-### Optional
+**Schema. Optional:**
 
-- **api_endpoint** (String) The URL to use for the BCC API.
-- **token** (String) The token key for API operations.
+*   `ca_cert` — the content of the certificate file or the path to the root certificate, e.g., `file("./root-ca.crt")`;
+*   `cert` — the content of the certificate file or the path to the client or intermediate certificate, e.g., `file("./client.crt")`;
+*   `cert_key` — the content of the key file or the path to the client certificate key, e.g., `file("./key.crt")`;
+*   `insecure` — allows connecting to the BCC without TLS certificate verification. The default value is `false`. With `insecure = true`, an insecure connection is established. When certificates are added, the `insecure` parameter is ignored.

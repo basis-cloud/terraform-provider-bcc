@@ -54,3 +54,5 @@ require (
 	google.golang.org/grpc v1.59.0 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
 )
+
+replace github.com/basis-cloud/bcc-go v0.4.1 => github.com/sa1tbaby/bcc-go v0.0.0-20260205131926-d2c81a26b078
